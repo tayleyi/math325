@@ -81,8 +81,14 @@
 							{board[9 * i + j]}
 						{/if}
 					</td>
+					{#if ((j+1) % 3 == 0)}
+						<span class="vertical-bar"></span>
+					{/if}
 				{/each}
 			</tr>
+			{#if ((i+1) % 3 == 0)}
+				<tr class="horizontal-bar"></tr>
+			{/if}
 		{/each}
 	</table>
 </div>
@@ -94,11 +100,20 @@
 		width: 80%;
 		height: 80%;
 	}
-	table, tr, td {
+	tr, td {
 		border: solid;
+	}
+	table {
+		width: 30rem;
 	}
 	input, td, tr {
 		width: 2rem;
-		height: 4rem;
+		height: 2rem;
+	}
+	.vertical-bar {
+		width: 1rem;
+	}
+	.horizontal-bar {
+		height: 1rem;
 	}
 </style>

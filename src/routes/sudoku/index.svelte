@@ -1,13 +1,8 @@
 <script>
 	import { onMount } from 'svelte';
-	import Board from './Board.svelte';
+	import Board from '../../components/Board.svelte';
 
 	let easy = true;
-
-	if (easy) {
-
-	}
-
 
 	let startTime = new Date();
 	let time = new Date();
@@ -30,12 +25,14 @@
 				<input type=radio bind:group={easy} name="difficulty" value={true}>
 				easy
 			</label>
+			<!--
 			<label>
 				<input type=radio bind:group={easy} name="difficulty" value={false}>
 				difficult
 			</label>
+			-->
 		</div>
-		<button>status update</button>
+		<a href="{false ? './sudoku/success' : './sudoku/fail'}">status update</a>
 	</div>
 </main>
 
@@ -53,10 +50,5 @@
 	}
 	.difficulty-setting {
 		flex: 1;
-	}
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
 	}
 </style>
