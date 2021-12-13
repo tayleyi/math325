@@ -11,9 +11,8 @@
 
 	let startTime = new Date();
 	let time = new Date();
-	$: hours = time.getHours() - startTime.getHours();
-	$: minutes = time.getMinutes() - startTime.getMinutes();
-	$: seconds = time.getSeconds() - startTime.getSeconds();
+	$: minutes = new Date(time - startTime).getMinutes();
+	$: seconds = new Date(time - startTime).getSeconds();
 	onMount(() => {
 		const interval = setInterval(() => {
 			time = new Date();
@@ -25,7 +24,7 @@
 	<Board easy={easy} />
 
 	<div class="status-box">
-		<p class="time-elapsed">{hours}:{minutes}:{seconds}</p>
+		<p class="time-elapsed">{minutes}:{(seconds < 10) ? '0' + seconds : seconds}</p>
 		<div class="difficulty-setting">
 			<label>
 				<input type=radio bind:group={easy} name="difficulty" value={true}>
@@ -44,15 +43,9 @@
 	main {
 		text-align: center;
 		width: 80vw;
-		margin: 10%;
-		font-size: 32px;
-	}
-	table {
-		width: 80vh;
-		height: 80vh;
-	}
-	table, tr, td {
-		border: solid;
+		margin-left: 10%;
+		margin-right: 10%;
+		font-size: 28px;
 	}
 	.status-box {
 		display: flex;

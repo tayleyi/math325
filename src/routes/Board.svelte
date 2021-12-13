@@ -89,13 +89,16 @@
 
 <style>
 	table {
-		width: 80vh;
-		height: 80vh;
+		margin-right: auto;
+		margin-left: auto;
+		width: 80%;
+		height: 80%;
 	}
 	table, tr, td {
 		border: solid;
 	}
-	input, td {
-		width: 20px;
+	input, td, tr {
+		width: 2rem;
+		height: 4rem;
 	}
 </style>
