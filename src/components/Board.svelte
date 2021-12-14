@@ -37,6 +37,15 @@
 		current_game = math.add(current_game, ith_row);
 	}
 	let blanks = [];
+	if (easy) {
+		upperLimit = 20;
+	}
+	else {
+		upperLimit = 40;
+	}
+	for (let k = 0; k < upperLimit; k++) {
+		blanks.push(Math.floor(Math.random() * 81 + 1));
+	}
 </script>
 
 <div>
@@ -53,7 +62,7 @@
 						{/if}
 					</td>
 					{#if ((j+1) % 3 == 0)}
-						<span class="vertical-bar"></span>
+						<td class="vertical-bar"></td>
 					{/if}
 				{/each}
 			</tr>
@@ -82,7 +91,8 @@
 		height: 2rem;
 	}
 	.vertical-bar {
-		width: 1rem;
+		width: .5rem;
+		border: none;
 	}
 	.horizontal-bar {
 		height: 1rem;
