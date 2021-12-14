@@ -32,7 +32,7 @@
 			</label>
 			-->
 		</div>
-		<a href="{false ? './sudoku/success' : './sudoku/fail'}">status update</a>
+		<a href="{false ? './sudoku/success' : './sudoku/fail'}">check my solution</a>
 	</div>
 </main>
 
