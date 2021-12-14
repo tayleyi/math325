@@ -1,33 +1,41 @@
 <script>
-	let board = new Set();
-	const I_9 = [[1, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 1, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 1, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 1, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 1, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 1, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 1, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 1, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 1]
-	];
+	import * as math from 'mathjs';
 
-	function create_permutation(starting_matrix) {
-		let permutation = [];
-		for (let i = 0; i < starting_matrix.length; i++) {
-			let row = Math.floor(Math.random() * starting_matrix.length);
+	export let easy;
+	let board = [];
 
-			if (row in starting_matrix) {
-				permutation.push(starting_matrix[row]);
-				starting_matrix.splice(row, 1);
-			}
+	function create_permutation() {
+		let starting_matrix = math.identity(9);
+
+		let tmp = [];
+		let p = [];
+
+		for (let i = 0; i < 9; i++) {
+			tmp.push(math.row(starting_matrix, i));
 		}
+
+		for (let i = 0; i < 9; i++) {
+			let row_number = Math.floor(Math.random() * tmp.length);
+			p.push(tmp[row_number]);
+			tmp.splice(row_number, 1);
+		}
+
+		let permutation = math.matrixFromRows(
+			p[0], p[1], p[2],
+			p[3], p[4], p[5],
+			p[6], p[7], p[8]
+		);
 		return permutation;
 	}
 
-	while (board.size < 9) {
-		board.add(create_permutation(I_9));
+	while (board.length < 9) {
+		board.push(create_permutation());
 	}
-
+	let current_game = math.zeros(9, 9);
+	for (let i = 0; i < board.length; i++) {
+		let ith_row = math.multiply(i + 1, board[i]);
+		current_game = math.add(current_game, ith_row);
+	}
 	let blanks = [];
 </script>
 
@@ -41,7 +49,7 @@
 						{#if blanks.includes(9 * i + j)}
 							<input>
 						{:else}
-							{board[9 * i + j]}
+							{current_game.get([i, j])}
 						{/if}
 					</td>
 					{#if ((j+1) % 3 == 0)}
